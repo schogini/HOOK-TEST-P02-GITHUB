@@ -4,3 +4,58 @@ git init
 cat ~/.ssh/id_rsa.pub 
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDG1KBLecehoZvA2hqWSMxMDqVb5tegz9+6JcHR4Mc9s1bLu587crikLKN1UE6gT/FE/Qmyz4+QdN1H8MgqraMdtl2fKlKQf5x/uWSTdZT/3XSMDI+DDkDrSYEXK7u5+XrdH3HJsznGPDufL+T99RBLC/ZLyg/Al+2Nhr2AN3TBOIa4j+UTUnN5d67OOu8gYt8nnU4shrd/Fj2pH82h+e3E0QPrambzPFUSyutJiT5If6/UPTT46IFrjfnaTODem3W7I/9HunVFWGyjgpjHeEVyWSIPfyiGZtc6V+OrG0S7zqbKFV3QDJnRwhxdXnEs43Kk+68B6A0Vl1Lq6RC2CAUB sree@Sreeprakashs-MacBook-Air.local
 
+git remote add origin git@github.com:schogini/HOOK-TEST-P02-GITHUB.git
+
+Jenkinsfile
+
+pipeline {
+
+  agent any
+
+  stages {
+
+	    stage('Cloning Git') {
+	      steps {
+	        git 'https://github.com/schogini/HOOK-TEST-P02-GITHUB.git'
+	      }
+	    }
+	    stage('Building image') {
+	      steps{
+	        script {
+	          sh "ls -l"
+	          sh "echo 2222"
+	        }
+	      }
+	    }
+	    stage('Testing image') {
+	      steps{
+	        script {
+	          sh "echo 3333"
+	        }
+	      }
+	    }
+		stage('Pushing Image') {
+	      steps{
+	        script {
+	          sh "echo 4444"
+	        }
+	      }
+		}     
+	}
+}
+
+
+git add .
+git commit -m Sree
+
+GitHub->HOOK-TEST-P02-GITHUB->Settings->DeployKeys->Add Deploy Key->Paste->AllowWriteAccess
+
+git push origin master
+
+
+Jenkins->Manage Plugins->GitHub Integration
+Jenkins->Job->GitHub hook trigger for GITScm polling>
+Poll SCM
+
+GitHub->HOOK-TEST-P02-GITHUB->Settings->Webhooks->Add WebHook
+Webhooks allow external services to be notified when certain events happen. When the specified events happen, we’ll send a POST request to each of the URLs you provide.
