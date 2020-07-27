@@ -48,12 +48,5 @@ pipeline {
 
 
 
-	    stage('Testing image') {
-	      steps{
-	        script {
-	          sh "echo 3333"
-	        }
-	      }
-	    }
 	}
 }
