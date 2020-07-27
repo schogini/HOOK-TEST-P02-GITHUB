@@ -1,6 +1,5 @@
 pipeline {
- 
-  environment {
+   environment {
     image = "schogini/my-image"
     registryCredential = "docker-hub"
     slackChannelTest = credentials('slack-test')
