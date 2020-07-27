@@ -5,7 +5,7 @@ pipeline {
     slackChannelTest = credentials('slack-test')
     dockerImage = ''
   }
-
+ 
   agent any
  
   stages {
