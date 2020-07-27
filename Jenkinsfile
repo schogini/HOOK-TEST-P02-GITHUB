@@ -12,7 +12,6 @@ pipeline {
 	    stage('Building image') {
 	      steps{
 	        script {
-	          sh "docker rm -f my-web 2>&1"
 	          sh "docker build -t my-web ."
 	          sh "docker run -d -p 443:8123 --name my-web my-web"
 	        }
