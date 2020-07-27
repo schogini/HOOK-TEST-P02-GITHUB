@@ -1,6 +1,6 @@
 #!/bin/sh
 
-
+docker container rm -f tmp-web 
 qq=$(docker service ls|grep -c tmp1-svc)
 
 #// --update-delay
