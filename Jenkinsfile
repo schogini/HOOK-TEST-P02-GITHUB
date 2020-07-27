@@ -1,5 +1,13 @@
 pipeline {
 
+  environment {
+    image = "schogini/my-image"
+    registryCredential = "docker-hub"
+    slackChannelTest = credentials('slack-test')
+    dockerImage = ''
+  }
+
+
   agent any
 
   stages {
@@ -12,14 +20,15 @@ pipeline {
 	    stage('Build Image') {
 	      steps{
 	        script {
-	          sh "docker build -t my-web ."
+	          // sh "docker build -t my-web ."
+                  dockerImage = docker.build image + ":$BUILD_NUMBER"
 	        }
 	      }
 	    }
 	    stage('Deploy Test Server') {
 	      steps{
 	        script {
-	          sh "./deploy-test.sh ${env.BUILD_ID} my-web"
+	          sh "./deploy-test.sh ${env.BUILD_ID} ${env.image}:${env.BUILD_ID}"
 	        }
 	      }
 	    }
