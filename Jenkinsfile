@@ -9,11 +9,17 @@ pipeline {
 	        git 'https://github.com/schogini/HOOK-TEST-P02-GITHUB.git'
 	      }
 	    }
-	    stage('Building image') {
+	    stage('Build Image') {
 	      steps{
 	        script {
 	          sh "docker build -t my-web ."
-	          sh "docker run -d -p 443:8123 --name my-web my-web"
+	        }
+	      }
+	    }
+	    stage('Deploy Test Server') {
+	      steps{
+	        script {
+	          sh "./deploy-test.sh ${env.BUILD_ID} my-web"
 	        }
 	      }
 	    }
