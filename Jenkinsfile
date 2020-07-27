@@ -37,7 +37,6 @@ pipeline {
 	      steps{
 	        script {
 	          env.TEST = sh(returnStdout: true, script: "./test-8123.sh ${env.BUILD_ID} ${env.registry}:${env.BUILD_ID}").trim()
-		  // sh("docker container rm -f tmp-web >> log.txt 2>&1")
 		  if (env.TEST != "SUCCESS") {
 			currentBuild.result = 'ABORTED'
 			error("Test Failed Aborting.. ${env.TEST}")
