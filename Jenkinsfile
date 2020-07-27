@@ -55,12 +55,5 @@ pipeline {
 	        }
 	      }
 	    }
-		stage('Pushing Image') {
-	      steps{
-	        script {
-	          sh "echo 5555"
-	        }
-	      }
-		}     
 	}
 }
