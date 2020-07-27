@@ -34,6 +34,22 @@ pipeline {
 	    }
 
 
+
+	    stage('Testing image') {
+	      steps{
+	        script {
+	          env.TEST = sh(returnStdout: true, script: "./test-8123.sh ${env.BUILD_ID} ${env.registry}:${env.BUILD_ID}").trim()
+	        }
+	      }
+	    }
+
+
+
+
+
+
+
+
 		stage('Pushing Image') {
 			steps{    
 				script {
