@@ -1,5 +1,5 @@
 pipeline {
-
+ 
   environment {
     image = "schogini/my-image"
     registryCredential = "docker-hub"
