@@ -32,6 +32,22 @@ pipeline {
 	        }
 	      }
 	    }
+
+
+		stage('Pushing Image') {
+			steps{    
+				script {
+					docker.withRegistry( '', registryCredential ) {
+					dockerImage.push()
+					}
+				}
+			}
+		} 
+
+
+
+
+
 	    stage('Testing image') {
 	      steps{
 	        script {
