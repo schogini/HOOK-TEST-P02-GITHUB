@@ -39,11 +39,14 @@ pipeline {
 	        script {
 	          env.TEST = sh(returnStdout: true, script: "./test-8123.sh ${env.BUILD_ID} ${env.registry}:${env.BUILD_ID}").trim()
 
-		  if (env.TEST == "SUCCESS") {
+		  if (env.TEST != "SUCCESS") {
 			currentBuild.result = 'ABORTED'
 			error("Test Failed Aborting.. ${env.TEST}")
 			sh "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"July 27 Build ${env.BUILD_ID} Failed!\"}' ${env.slackChannelTest}"
-		  }
+		  }else{
+
+			sh "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"Build ${env.BUILD_ID} Succeeded!\"}' ${env.slackChannelTest}"
+		}
 
 
 
